@@ -216,7 +216,12 @@ jobs:
       - name: Push Docker image to Docker Hub
         run: docker push docker-hub-repo/frontend:${{ env.DOCKER_TAG }}
 ```
-The GitHub Actions workflow provided utilizes the Dockerfile located within the project directory to construct the Docker image. After the image is built, the action proceeds to push it to the Docker Hub repository using the command:
+The GitHub Actions workflow provided utilizes the Dockerfile located within the project directory to construct the Docker image.
+```console
+docker build -t docker-hub-repo/frontend:${{ env.DOCKER_TAG }} 
+```
+
+ After the image is built, the action proceeds to push it to the Docker Hub repository using the command:
 
 ```console
 docker push docker-hub-repo/frontend:${{ env.DOCKER_TAG }}
