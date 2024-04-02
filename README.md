@@ -79,7 +79,7 @@ To ensure the success of CI/CD pipelines using Docker, Docker-Compose, Docker Hu
 
 ### Section 6: Real-World Use Cases:
 
-## Frontend React Application:
+## Building the react app and running using nginx:
 
 ***Project Structure:***
 
