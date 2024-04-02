@@ -403,13 +403,13 @@ jobs:
 The GitHub Actions workflow we have added is using the Dockerfile located in the project directory to build the Docker image. After building the image, it pushes the image to a Docker Hub repository. Let's break down the important parts:
 
 1. ***Building the Docker Image***:
-  - ***context***: .: Specifies the build context, which is the path to the directory containing the Dockerfile. In this case, it's set to the root of the project directory.
-  - ***file***: ./Dockerfile: Specifies the path to the Dockerfile within the build context.
-  - ***tags***: docker-hub-repo/backend:${{ env.DOCKER_TAG }}: Tags the built image with a specific tag. The tag is derived from the DOCKER_TAG environment variable.
-  - ***push***: true: Indicates that the built image should be pushed to a remote registry after the build process completes.
+    - ***context***: .: Specifies the build context, which is the path to the directory containing the Dockerfile. In this case, it's set to the root of the project directory.
+    - ***file***: ./Dockerfile: Specifies the path to the Dockerfile within the build context.
+    - ***tags***: docker-hub-repo/backend:${{ env.DOCKER_TAG }}: Tags the built image with a specific tag. The tag is derived from the DOCKER_TAG environment variable.
+    - ***push***: true: Indicates that the built image should be pushed to a remote registry after the build process completes.
 
 2. ***Docker Hub Credentials***:
-  - ***DOCKERHUB_USERNAME*** and ***DOCKERHUB_TOKEN*** are environment variables used to authenticate with Docker Hub for pushing the image. They are retrieved from GitHub Secrets to keep sensitive information secure.
+    - ***DOCKERHUB_USERNAME*** and ***DOCKERHUB_TOKEN*** are environment variables used to authenticate with Docker Hub for pushing the image. They are retrieved from GitHub Secrets to keep sensitive information secure.
 
 This workflow automates the process of building and pushing Docker images to a Docker Hub repository whenever changes are pushed to the repository. It's a convenient way to manage Docker images as part of a continuous integration/continuous deployment (CI/CD) pipeline.
 
