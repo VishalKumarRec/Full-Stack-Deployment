@@ -163,7 +163,7 @@ The Dockerfile provided compiles the production version of the source code by ex
 ```console
 RUN yarn build
 ```
-Afterwards, it places the resulting build into the directory used by Nginx to serve static pages:
+Afterwards, it places the resulting build into the directory used by Nginx to serve static pages on base dir (e.g ***/usr/share/nginx/html***):
 
 ```console
 COPY --from=builder /app/dist .
@@ -403,13 +403,13 @@ jobs:
 The GitHub Actions workflow we have added is using the Dockerfile located in the project directory to build the Docker image. After building the image, it pushes the image to a Docker Hub repository. Let's break down the important parts:
 
 1. ***Building the Docker Image***:
-  - context: .: Specifies the build context, which is the path to the directory containing the Dockerfile. In this case, it's set to the root of the project directory.
-  - file: ./Dockerfile: Specifies the path to the Dockerfile within the build context.
-  - tags: docker-hub-repo/backend:${{ env.DOCKER_TAG }}: Tags the built image with a specific tag. The tag is derived from the DOCKER_TAG environment variable.
-  - push: true: Indicates that the built image should be pushed to a remote registry after the build process completes.
+  - ***context***: .: Specifies the build context, which is the path to the directory containing the Dockerfile. In this case, it's set to the root of the project directory.
+  - ***file***: ./Dockerfile: Specifies the path to the Dockerfile within the build context.
+  - ***tags***: docker-hub-repo/backend:${{ env.DOCKER_TAG }}: Tags the built image with a specific tag. The tag is derived from the DOCKER_TAG environment variable.
+  - ***push***: true: Indicates that the built image should be pushed to a remote registry after the build process completes.
 
 2. ***Docker Hub Credentials***:
-  - DOCKERHUB_USERNAME and DOCKERHUB_TOKEN are environment variables used to authenticate with Docker Hub for pushing the image. They are retrieved from GitHub Secrets to keep sensitive information secure.
+  - ***DOCKERHUB_USERNAME*** and ***DOCKERHUB_TOKEN*** are environment variables used to authenticate with Docker Hub for pushing the image. They are retrieved from GitHub Secrets to keep sensitive information secure.
 
 This workflow automates the process of building and pushing Docker images to a Docker Hub repository whenever changes are pushed to the repository. It's a convenient way to manage Docker images as part of a continuous integration/continuous deployment (CI/CD) pipeline.
 
@@ -480,11 +480,11 @@ networks:
 ```
 The provided docker-compose.yml file sets up five services, each corresponding to a component of the application:
 
-1. Frontend (core frontend container)
-2. Backend (core backend container)
-3. Celery (to run long running task)
-4. Celery-beat (to run periodic tasks)
-5. Redis (as a message broker service for celery)
+1. ***Frontend*** (container to serve frontend)
+2. ***Backend*** (container to serve backend)
+3. ***Celery*** (container to run long running task)
+4. ***Celery-beat*** (container to run periodic tasks)
+5. ***Redis*** (container as a message broker service for celery)
 
 These services are configured to use Docker images retrieved directly from Docker Hub, abstracting away the source code details.
 
